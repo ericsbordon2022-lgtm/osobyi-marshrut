@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Панель управления — Особый маршрут</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+  <header class="admin-header">
+    <div class="admin-header__brand">
+      <span style="font-size:1.8rem">🛠️</span>
+      <div>
+        <div class="admin-header__title">Панель управления сайтом</div>
+        <span class="admin-header__sub">«Особый маршрут» — поддержка и развитие обучающихся</span>
+      </div>
+    </div>
+    <div class="admin-header__actions">
+      <span id="save-state" class="save-state">Все изменения сохранены</span>
+      <button id="save-btn" class="btn btn--primary" type="button" disabled>💾 Сохранить</button>
+      <a href="/" class="btn btn--ghost" target="_blank">🌐 На сайт</a>
+    </div>
+  </header>
+
+  <div class="admin-wrap">
+    <aside class="admin-side">
+      <div id="side"></div>
+      <hr style="margin: 20px 0; border: none; border-top: 1px solid var(--c-border)">
+      <div style="display: flex; flex-direction: column; gap: 8px;">
+        <a href="/download-netlify" class="btn btn--primary btn--sm" style="text-align: center; text-decoration: none; margin-bottom: 4px;">🚀 Скачать для Netlify (ZIP)</a>
+        <button id="export-json" class="btn btn--ghost btn--sm" style="color: var(--c-text); border-color: var(--c-border);" type="button">📥 Скачать бэкап (JSON)</button>
+        <label class="btn btn--ghost btn--sm" style="color: var(--c-text); border-color: var(--c-border); cursor: pointer; text-align: center;">
+          📤 Восстановить из JSON
+          <input type="file" id="import-json" accept=".json" style="display: none;">
+        </label>
+      </div>
+    </aside>
+
+    <main class="admin-work" id="work">
+      <!-- Динамический контент выбранного раздела -->
+    </main>
+  </div>
+
+  <div id="toast" class="toast" hidden></div>
+
+  <script src="/assets/data/content.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>
