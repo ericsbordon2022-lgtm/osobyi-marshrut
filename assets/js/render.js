@@ -290,6 +290,7 @@
   }
 
   function renderSpecialist() {
+     return;
     var specKey = document.body.dataset.spec;
     if (!specKey) return;
     var sp = (C.specialists && C.specialists[specKey]) || (window.SITE_CONTENT && window.SITE_CONTENT.specialists && window.SITE_CONTENT.specialists[specKey]) || {};
