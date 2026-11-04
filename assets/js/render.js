@@ -304,7 +304,7 @@
       if (teacher.photo || teacher.name) {
         var tPhoto = teacher.photo ? ((teacher.photo.startsWith('/') || teacher.photo.startsWith('http') || teacher.photo.startsWith('data:')) ? teacher.photo : '/' + teacher.photo) : '';
         var photoInner = tPhoto
-          ? '<img src="' + esc(tPhoto) + '" alt="' + esc(teacher.name || '') + '" class="teacher-profile__photo" onerror="this.onerror=null;this.src=\'/media/hero_main.jpg\';">'
+               photoInner = '<img src="media/my-teacher-final.jpg" alt="Пермякова Светлана Валерьевна" class="teacher-profile__photo" style="display: block !important; width: 100%; height: auto;">';
           : '<span class="teacher-profile__placeholder" aria-hidden="true">👩‍🏫</span>';
         teacherBox.innerHTML = '<div class="teacher-profile">' +
           '<div class="teacher-profile__photo-wrap">' + photoInner + '</div>' +
