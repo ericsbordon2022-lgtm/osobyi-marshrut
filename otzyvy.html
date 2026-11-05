@@ -103,6 +103,14 @@
           </div>
         </form>
         <script>
+          // Код для открытия формы
+var toggleBtn = document.getElementById('toggle-review-form');
+var formBox = document.getElementById('review-form-box');
+if (toggleBtn && formBox) {
+    toggleBtn.addEventListener('click', function() {
+        formBox.hidden = !formBox.hidden; // Переключает видимость (открыть/закрыть)
+    });
+}
 document.getElementById('add-review-form').addEventListener('submit', function(e) {
     e.preventDefault(); // Останавливаем перезагрузку
     
