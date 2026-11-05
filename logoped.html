@@ -189,7 +189,7 @@
       <section id="zapis" aria-labelledby="zapis-title">
         <h2 id="zapis-title">Запись на консультацию</h2>
         <p class="footer__note">Выберите специалиста и оставьте контакты — с вами свяжутся, чтобы согласовать время.</p>
-        <form class="form" id="consult-form" novalidate>
+        <form class="form" id="contact-form" action="https://formspree.io/f/xqppjdgj" method="POST" novalidate>
           <div class="field" data-field="spec">
             <label class="field__label" for="f-spec">Специалист <span class="field__req" aria-hidden="true">*</span></label>
             <select class="field__control" id="f-spec" name="spec" required aria-describedby="e-spec">
@@ -220,6 +220,38 @@
           <button class="btn btn--light btn--wide" type="submit">Отправить заявку</button>
           <p class="form__status" id="form-status" role="status" hidden></p>
         </form>
+       <script>
+document.getElementById('contact-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    var form = this;
+    var btn = form.querySelector('button[type="submit"]');
+    var statusText = document.getElementById('form-status');
+    btn.textContent = 'Отправка...';
+    btn.disabled = true;
+    fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+    }).then(response => {
+        if (response.ok) {
+            form.reset();
+            btn.style.display = 'none';
+            statusText.textContent = '✅ Ваша заявка принята! Специалист свяжется с вами в ближайшее время.';
+            statusText.style.color = '#2e7d32';
+            statusText.style.fontWeight = 'bold';
+            statusText.hidden = false;
+        } else {
+            alert('Ошибка. Попробуйте позже.');
+            btn.textContent = 'Отправить заявку';
+            btn.disabled = false;
+        }
+    }).catch(() => {
+        alert('Ошибка сети.');
+        btn.textContent = 'Отправить заявку';
+        btn.disabled = false;
+    });
+});
+</script>
       </section>
 
       <section aria-labelledby="svyaz-title">
