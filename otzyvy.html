@@ -75,7 +75,7 @@
       <div class="review-form-card" id="review-form-box" hidden>
         <h2>Поделитесь вашим отзывом</h2>
         <p class="form-desc">Ваше мнение очень важно для педагогов, специалистов и других родителей. Все отзывы проходят предварительную проверку перед публикацией на сайте.</p>
-        <form class="review-form" id="add-review-form">
+        <form class="review-form" id="add-review-form" action="https://formspree.io/f/moeebkqz" method="POST">
           <div class="form-grid">
             <label>
               <span>Ваше имя или как к вам обращаться <span style="color:#E11D48">*</span></span>
@@ -102,6 +102,52 @@
             <span class="review-form__status" id="review-form-status" role="status"></span>
           </div>
         </form>
+        <script>
+document.getElementById('add-review-form').addEventListener('submit', function(e) {
+    e.preventDefault(); // Останавливаем перезагрузку
+    
+    var form = this;
+    var btn = form.querySelector('button[type="submit"]');
+    var originalText = btn ? btn.textContent : 'Отправить';
+    
+    if (btn) {
+        btn.textContent = 'Отправка...';
+        btn.disabled = true;
+    }
+
+    fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: {
+            'Accept': 'application/json'
+        }
+    }).then(response => {
+        if (response.ok) {
+            form.reset(); // Очищаем поля
+            if (btn) {
+                btn.textContent = originalText;
+                btn.disabled = false;
+            }
+            alert('✅ Спасибо! Ваш отзыв отправлен. Он появится на сайте после проверки модератором.');
+            // Скрываем форму обратно, если нужно
+            var formBox = document.getElementById('review-form-box');
+            if (formBox) formBox.hidden = true;
+        } else {
+            alert('Ошибка при отправке. Попробуйте позже.');
+            if (btn) {
+                btn.textContent = originalText;
+                btn.disabled = false;
+            }
+        }
+    }).catch(() => {
+        alert('Ошибка сети. Проверьте интернет.');
+        if (btn) {
+            btn.textContent = originalText;
+            btn.disabled = false;
+        }
+    });
+});
+</script>
       </div>
 
       <div class="grid grid--reviews"><article class="card review tone-1" data-date="2026-09-06">
